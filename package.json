@@ -1,15 +1,20 @@
 {
   "name": "electron-angular-seed",
+  "license": "MIT",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "rimraf dist && concurrently \"yarn run ng:build:watch\" \"yarn run electron:serve\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "ng:build:watch": "ng build --watch",
+    "electron:serve": "yarn run electron:build:init && wait-on ./dist/electron-angular-seed/index.html &&  electron . --serve",
+    "electron:build:init": "tsc init.ts --types --outDir dist"
   },
   "private": true,
+  "main": "dist/init.js",
   "dependencies": {
     "@angular/animations": "~7.2.0",
     "@angular/common": "~7.2.0",
@@ -29,10 +34,13 @@
     "@angular/cli": "~7.2.1",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
+    "concurrently": "^4.1.0",
+    "electron": "^4.0.1",
+    "electron-reload": "^1.4.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.1.1",
@@ -43,6 +51,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "typescript": "~3.2.2",
+    "wait-on": "^3.2.0"
   }
 }
