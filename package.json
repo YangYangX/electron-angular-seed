@@ -11,7 +11,8 @@
     "e2e": "ng e2e",
     "ng:build:watch": "ng build --watch",
     "electron:serve": "yarn run electron:build:init && wait-on ./dist/electron-angular-seed/index.html &&  electron . --serve",
-    "electron:build:init": "tsc init.ts --types --outDir dist"
+    "electron:build:init": "tsc src/main/init.ts --types --outDir dist",
+    "clean":"rimraf dist"
   },
   "private": true,
   "main": "dist/init.js",
