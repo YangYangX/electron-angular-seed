@@ -2,17 +2,23 @@
   "name": "electron-angular-seed",
   "license": "MIT",
   "version": "0.0.0",
+  "author": {
+    "name": "Corecent Consulting",
+    "email": "developer@corecent.cn",
+    "url": "https://www.corecent.cn"
+  },
   "scripts": {
     "ng": "ng",
     "start": "rimraf dist && concurrently \"yarn run ng:build:watch\" \"yarn run electron:serve\"",
-    "build": "ng build",
+    "build": "electron-packager . electron-angular-seed --platform win32 --arch x64 --out dist/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ng:build:watch": "ng build --watch",
     "electron:serve": "yarn run electron:build:init && wait-on ./dist/electron-angular-seed/index.html &&  electron . --serve",
     "electron:build:init": "tsc src/main/init.ts --types --outDir dist",
-    "clean":"rimraf dist"
+    "setup": "electron-installer-windows --src dist/electron-angular-seed-win32-x64/ --dest dist/installers/ --config installerconfig.json",
+    "clean": "rimraf dist"
   },
   "private": true,
   "main": "dist/init.js",
@@ -41,6 +47,8 @@
     "codelyzer": "~4.5.0",
     "concurrently": "^4.1.0",
     "electron": "^4.0.1",
+    "electron-installer-windows": "^1.1.0",
+    "electron-packager": "^13.0.1",
     "electron-reload": "^1.4.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
